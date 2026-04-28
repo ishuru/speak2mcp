@@ -1,11 +1,13 @@
 # speak2mcp
 
+**Repository:** [github.com/ishuru/speak2mcp](https://github.com/ishuru/speak2mcp)
+
 Local **Model Context Protocol** (stdio) server that exposes:
 
-- **Speak2** — reads `~/.speak2/transcriptions.jsonl` (same schema as [shadow-speak plan](../../../docs/plans/2026-04-18-shadow-speak-s2s.md) and `obsidian-bee-transcript/bridge.cjs`).
-- **Bee** — `bee_create` tool runs `bee facts create` / `bee todos create` with `--json` (same argv shape as the Obsidian bridge tests).
+- **Speak2** — reads `~/.speak2/transcriptions.jsonl` (JSONL lines with `ts`, `text`, `model`, `duration_ms`, `app`; newest-first helpers).
+- **Bee** — `bee_create` tool runs `bee facts create` / `bee todos create` with `--json`.
 
-There is **no single public GitHub repo named `speak2mcp`**. Related upstreams you may compare:
+Related upstreams for comparison:
 
 - [modelcontextprotocol/typescript-sdk](https://github.com/modelcontextprotocol/typescript-sdk) — MCP server primitives.
 - [aj47/SpeakMCP](https://github.com/aj47/SpeakMCP) — Electron voice + MCP (broader product).
@@ -14,7 +16,8 @@ There is **no single public GitHub repo named `speak2mcp`**. Related upstreams y
 ## Install
 
 ```bash
-cd ShadowArchive/10-projects/speak2mcp
+git clone https://github.com/ishuru/speak2mcp.git
+cd speak2mcp
 npm install
 ```
 
@@ -27,7 +30,7 @@ Add to **Cursor MCP** config (e.g. `~/.cursor/mcp.json` or project `.cursor/mcp.
   "mcpServers": {
     "speak2mcp": {
       "command": "node",
-      "args": ["/ABS/PATH/TO/Duality/ShadowArchive/10-projects/speak2mcp/src/server.mjs"],
+      "args": ["/ABS/PATH/TO/speak2mcp/src/server.mjs"],
       "env": {
         "SPEAK2_TRANSCRIPT_PATH": "",
         "BEE_BIN": ""
