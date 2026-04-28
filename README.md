@@ -23,24 +23,33 @@ npm install
 
 ## Cursor MCP
 
-Add to **Cursor MCP** config (e.g. `~/.cursor/mcp.json` or project `.cursor/mcp.json`):
+This repo ships **`.cursor/mcp.json`** (tracked) so the server starts when the **workspace root is the Duality volume** (`☯Duality`). Cursor expands `${workspaceFolder}` in `args`.
+
+1. Open the folder **`/Volumes/☯Duality`** (or your clone of `shadow-root`) as the workspace root — not a subfolder only.
+2. **Reload / restart Cursor** after pulling so MCP picks up the config.
+3. Enable the **speak2mcp** server in Cursor Settings → MCP (toggle on if listed disabled).
+4. Smoke test: run tool **`speak2_doctor`** in the MCP panel; you should see `transcript_path`, `transcript_exists`, and `bee_bin_resolved`.
+
+If you use another workspace root, copy the `speak2mcp` block into `~/.cursor/mcp.json` and set `args` to an absolute path to `src/server.mjs`.
+
+Optional `env` on the server entry:
 
 ```json
-{
-  "mcpServers": {
-    "speak2mcp": {
-      "command": "node",
-      "args": ["/ABS/PATH/TO/speak2mcp/src/server.mjs"],
-      "env": {
-        "SPEAK2_TRANSCRIPT_PATH": "",
-        "BEE_BIN": ""
-      }
-    }
-  }
+"env": {
+  "SPEAK2_TRANSCRIPT_PATH": "/custom/path/transcriptions.jsonl",
+  "BEE_BIN": "/opt/homebrew/bin/bee"
 }
 ```
 
 Leave `SPEAK2_TRANSCRIPT_PATH` unset to use `~/.speak2/transcriptions.jsonl`. Set `BEE_BIN` if `bee` is not on `PATH`.
+
+### Verify from terminal
+
+```bash
+cd speak2mcp && npm test
+```
+
+The `stdio MCP` test boots the real server and calls `speak2_doctor` over JSON-RPC.
 
 ## Tools
 
