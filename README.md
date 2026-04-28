@@ -71,6 +71,14 @@ Same `command` + `args` as Cursor; any MCP stdio client works.
 
 ## Tests
 
+From this package:
+
 ```bash
 npm test
+```
+
+From **shadow-root** repo root (installs deps then runs tests):
+
+```bash
+npm run test:speak2mcp
 ```
